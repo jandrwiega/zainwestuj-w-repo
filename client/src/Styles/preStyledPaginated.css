@@ -1,0 +1,23 @@
+li.previous, li.next {
+    color: #fafafa;
+    font-weight: 700;
+}
+
+li {
+    color: rgb(120, 120, 120);
+}
+
+li.disabled {
+    position: absolute;
+    z-index: -1;
+}
+
+li.selected {
+    color: #6cc644;
+    border: 1px solid #6cc644;
+    border-radius: 50%;
+}
+
+li.break {
+    color: lightgray;
+}
