@@ -75,6 +75,13 @@
     width: 30px;
     height: 30px;
 }
-.investorsListDonations {
-
+.investorsListDonations > ul{
+    list-style: none;
+    margin-bottom: 10px;
+}
+.investorsListDonations > ul:last-child {
+    margin-bottom: 0;
+}
+.investorsListDonations > ul > li {
+    color: black;
 }

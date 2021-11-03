@@ -1,0 +1,50 @@
+.declareWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1em;
+}
+.declareWrapper > h2 {
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.declareWrapper > label {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+.declareWrapper > p {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+.declareWrapper > p > svg {
+    margin-right: 10px;
+}
+.declareWrapper > label > input {
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+}
+.declareWrapper > span {
+    font-size: .9rem;
+    color: red;
+    display: block;
+}
+.declareWrapper > input {
+    margin-bottom: 10px;
+    height: 35px;
+    padding: 10px;
+    border: 2px solid lightgray;
+    outline: 0;
+    transition: all .3s ease-in-out;
+}
+.declareWrapper > input:focus {
+    border-color: black;
+}
+.declareWrapper > button {
+margin-top: 10px;
+}

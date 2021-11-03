@@ -1,0 +1,23 @@
+.aboutRepo {
+    width: 100%;
+    padding: 1em;
+}
+.repoDetails {
+    width: 100%;
+    max-width: 500px;
+    margin: 1em auto;
+    text-align: center;
+}
+.repoDetails > h2, .repoDetails > h3 {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.repoDetails > p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+.repoDetails > p > svg {
+margin-right: 5px;
+}

@@ -6,6 +6,14 @@ const AppProvider = ({children}) => {
 
     const [repoList, setRepoList] = useState([])
     const [isRepoListLoaded, setIsRepoListLoaded] = useState(false)
+
+    const [isRefreshRequired, setIsRefreshRequired] = useState(false)
+    const handleMustRefresh = () => {
+        setIsRefreshRequired(true)
+        alert(isRefreshRequired)
+    }
+
+    const [investorsList, setInvestorsList] = useState([])
     useEffect(() => {
         fetch('http://localhost:5000/getRepoList')
         .then(response => response.json())
@@ -13,7 +21,15 @@ const AppProvider = ({children}) => {
             setRepoList(data);
             setIsRepoListLoaded(true)
         })
+
+        fetch('http://localhost:5000/getInvestorsList')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            setInvestorsList(data)
+        })
     }, [])
+
 
     const [lastPageOpened, setLastPageOpened] = useState(0)
     const handleSetLastPageOpened = (index) => {
@@ -21,7 +37,7 @@ const AppProvider = ({children}) => {
     }
     
     return ( 
-        <AppContext.Provider value={{ repoList, isRepoListLoaded, lastPageOpened, handleSetLastPageOpened }}>
+        <AppContext.Provider value={{ handleMustRefresh, investorsList, repoList, isRepoListLoaded, lastPageOpened, handleSetLastPageOpened }}>
             {children}
         </AppContext.Provider>
      );

@@ -1,26 +1,15 @@
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-import investStyles from '../../Styles/invest.module.css'
 import Loading from "../ContentLoader/Loading";
-
-const ColorButton = styled(Button)(() => ({
-    backgroundColor: 'white',
-    borderColor: '#6cc644',
-    color: '#6cc644',
-    '&:hover': {
-      borderColor: '#6cc644',
-    }
-  }));
+import AboutRepo from "./AboutRepo";
+import DeclareInvest from "./DeclareInvest";
+import SubmitInvest from "./SubmitInvest";
 
 const Invest = () => {
 
     let { id } = useParams()
-    const history = useHistory()
     const { repoList, isRepoListLoaded } = useContext(AppContext)
 
     const [repoItem, setRepoItem] = useState({})
@@ -33,16 +22,53 @@ const Invest = () => {
         }
     }, [id, repoList])
 
-    useEffect(() => {
-        console.log(repoItem);
-    }, [repoItem])
+    const [investAmount, setInvestAmount] = useState('')
+    const [investAmountAccepted, setInvestAmountAccepted] = useState(false)
+    const handleSetInvestAmount = (e) => {
+        const value = e.target.value;
+        setInvestAmount(value)
+        const regex = /(^[0-9]{1}[0-9.]{0,5}[0-9]{1}$)/
+        if(regex.test(value) && value >= 0.1 && value <= 2500) {
+            setInvestAmountAccepted(true)
+        }   else {
+            setInvestAmountAccepted(false)
+        }
+    }
+
+    const [investorEmail, setInvestorEmail] = useState('')
+    const [investorEmailAccepted, setInvestorEmailAccepted] = useState(false)
+    const handleSetInvestorEmail = (e) => {
+        const value = e.target.value;
+        setInvestorEmail(value)
+        // eslint-disable-next-line
+        const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        if(regex.test(value)) {
+            setInvestorEmailAccepted(true)
+        }   else {
+            setInvestorEmailAccepted(false)
+        }
+    }
+
+    const [isAmountDeclared, setIsAmountDeclared] = useState(false)
+    const [isValidationOn, setIsValidationOn] = useState(false)
+    const handleGoToSummary = () => {
+        if(!isValidationOn) {
+            setIsValidationOn(true)
+        }
+        if(investAmountAccepted && investorEmailAccepted) {
+            setIsAmountDeclared(true)
+        }
+    }
 
     return ( 
         <>
             { isRepoListLoaded ? <> 
-                <ColorButton variant='outlined' className={investStyles.goBackBtn} onClick={history.goBack}><ArrowBackIcon /> Powrót do listy</ColorButton>
-                <h1>Inwestuj w {id}</h1>
-                <h2>{ repoItem.id }</h2>
+                <AboutRepo repo={repoItem}/>
+                { isAmountDeclared ?
+                    <SubmitInvest projectData={repoItem} investAmount={investAmount} investorEmail={investorEmail}/>
+                    : 
+                    <DeclareInvest isValidationOn={isValidationOn} amountAccepted={investAmountAccepted} emailAccepted={investorEmailAccepted} investAmount={investAmount} investorEmail={investorEmail} setAmount={handleSetInvestAmount} setEmail={handleSetInvestorEmail} nextStep={handleGoToSummary}/>
+                }
             </> : <Loading /> }
         </>
      );
