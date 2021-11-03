@@ -1,5 +1,5 @@
-Hi, nice to see you!
+Miło cie widzieć!
 
-To start this page type 'node server.js' in console window.
+Aby otworzyć projekt wpisz w konsoli "node server.js"
 
-Enjoy using website!
+Przyjemnego użytkowania :)

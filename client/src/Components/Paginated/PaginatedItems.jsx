@@ -48,6 +48,7 @@ import Loading from "../ContentLoader/Loading";
         }
       }
       setRepoInvestorsList(getInvestorsArray)
+      // eslint-disable-next-line
     }, [investorsList])
 
     const handleDisplatInvestAmount = () => {

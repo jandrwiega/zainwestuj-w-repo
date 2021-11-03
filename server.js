@@ -49,7 +49,8 @@ app.post('/saveInvestorData', (req, res) => {
     
         fs.writeFile('investorsDB.json', JSON.stringify(investorsArray), (err) => {
             if(err) throw err;
-            res.send('New Investor Added')
         })
+        
     })
+    res.send('New Investor Added')
 })

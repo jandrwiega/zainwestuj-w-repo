@@ -7,10 +7,12 @@ const AppProvider = ({children}) => {
     const [repoList, setRepoList] = useState([])
     const [isRepoListLoaded, setIsRepoListLoaded] = useState(false)
 
-    const [isRefreshRequired, setIsRefreshRequired] = useState(false)
     const handleMustRefresh = () => {
-        setIsRefreshRequired(true)
-        alert(isRefreshRequired)
+        fetch('http://localhost:5000/getInvestorsList')
+        .then(response => response.json())
+        .then(data => {
+            setInvestorsList(data)
+        })
     }
 
     const [investorsList, setInvestorsList] = useState([])
@@ -25,7 +27,6 @@ const AppProvider = ({children}) => {
         fetch('http://localhost:5000/getInvestorsList')
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             setInvestorsList(data)
         })
     }, [])
