@@ -87,9 +87,6 @@ import Loading from "../ContentLoader/Loading";
   }
 
   const DisplayInvestorRow = ({data}) => {
-
-    console.log(data);
-
     return ( 
       <ul>
         <li>{data.investAmount}zł</li>

@@ -7,6 +7,8 @@ import AboutRepo from "./AboutRepo";
 import DeclareInvest from "./DeclareInvest";
 import SubmitInvest from "./SubmitInvest";
 
+import investStyles from '../../Styles/invest.module.css'
+
 const Invest = () => {
 
     let { id } = useParams()
@@ -62,14 +64,14 @@ const Invest = () => {
 
     return ( 
         <>
-            { isRepoListLoaded ? <> 
+            { isRepoListLoaded ? <div className={investStyles.investWrapper}> 
                 <AboutRepo repo={repoItem}/>
                 { isAmountDeclared ?
                     <SubmitInvest projectData={repoItem} investAmount={investAmount} investorEmail={investorEmail}/>
                     : 
                     <DeclareInvest isValidationOn={isValidationOn} amountAccepted={investAmountAccepted} emailAccepted={investorEmailAccepted} investAmount={investAmount} investorEmail={investorEmail} setAmount={handleSetInvestAmount} setEmail={handleSetInvestorEmail} nextStep={handleGoToSummary}/>
                 }
-            </> : <Loading /> }
+            </div> : <Loading /> }
         </>
      );
 }
