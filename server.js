@@ -3,6 +3,11 @@ import fetch from 'node-fetch';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import fs from 'fs'
+import path from 'path';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
@@ -53,3 +58,9 @@ app.post('/saveInvestorData', (req, res) => {
         })
     })
 })
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
